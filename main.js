@@ -19,19 +19,17 @@ const onClickNumber = (event) => {
    $result.value += event.target.textContent;
 };
 
-let haveDot = false;
 const onClickDecimal = (event) => {
-   if(!numOne || event.target.textContent === "."){
+   if(!numOne && event.target.textContent === "."){
       return;
-   } else if(numOne || event.target.textContent.includes(".")){
+   } else if(numOne && event.target.textContent === "."){
+      numOne += event.target.textContent;
       $result.value += event.target.textContent;
+      console.log(numOne);
    }
 
-   if(!numTwo){
-      return;
-   } else if(numTwo){
+   if(operator){
       numTwo += event.target.textContent;
-      $result.value += event.target.textContent;
    }
 }
 document.querySelector("#num-0").addEventListener("click", onClickNumber);
