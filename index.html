@@ -12,35 +12,35 @@
 <body>
   <h1>Calculator</h1>
   <div id="calculator">
-    <input readonly id="operator" />
     <input readonly type="text" id="result" />
-    <div class="row">
-      <button id="clear">C</button>
-      <button id="divide">/</button>
-      <button id="multiply">*</button>
-    </div>
-    <div class="row">
-      <button id="num-7">7</button>
-      <button id="num-8">8</button>
-      <button id="num-9">9</button>
-      <button id="plus">+</button>
-    </div>
-    <div class="row">
-      <button id="num-4">4</button>
-      <button id="num-5">5</button>
-      <button id="num-6">6</button>
-      <button id="minus">-</button>
-    </div>
-    <div class="row">
-      <button id="num-1">1</button>
-      <button id="num-2">2</button>
-      <button id="num-3">3</button>
-      <button id="decimal">.</button>
-    </div>
-    <div class="row">
-      <button id="num-0">0</button>
-      <button id="calculate">=</button>
-
+    <div class="buttons">
+      <div class="row">
+        <button class="clear">C</button>
+        <button class="calculate">=</button>
+      </div>
+      <div class="row">
+        <button class="number">7</button>
+        <button class="number">8</button>
+        <button class="number">9</button>
+        <button class="operator">/</button>
+      </div>
+      <div class="row">
+        <button class="number">4</button>
+        <button class="number">5</button>
+        <button class="number">6</button>
+        <button class="operator">*</button>
+      </div>
+      <div class="row">
+        <button class="number">1</button>
+        <button class="number">2</button>
+        <button class="number">3</button>
+        <button class="operator">-</button>
+      </div>
+      <div class="row">
+        <button class="num-0 number">0</button>
+        <button class="decimal">.</button>
+        <button class="operator">+</button>
+      </div>
     </div>
   </div>
   <script src="./main.js"></script>
