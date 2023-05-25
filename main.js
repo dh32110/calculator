@@ -29,21 +29,35 @@ function onClickBtn(event) {
 
    if (target.matches('button')) {
       if (action === 'number') {
-         if (!operators) {
+         if (!operators || numOne === '-') {
             numOne += btnContent;
             result.value += btnContent;
-            console.log(numOne);
-         } else {
+         } else if (operators) {
             numTwo += btnContent;
             result.value += btnContent;
-            console.log(numTwo);
          }
       }
-      if (action === 'operator') {
+
+      if (action === 'operator' && btnContent === '-') {
+         if (!numOne) {
+            numOne += btnContent;
+            result.value += btnContent;
+         } else if (numOne && !operators) {
+            operators += btnContent;
+            result.value += btnContent;
+         }
+         if (operators && !numTwo) {
+            numTwo += btnContent;
+            result.value += btnContent;
+         } else if (numTwo && !operators) {
+            operators += btnContent;
+            result.value += btnContent;
+         }
+      } else if (action === 'operator' && btnContent !== '-'){
          operators += btnContent;
          result.value += btnContent;
-         console.log(operators);
       }
+
       if (action === 'clear') {
          numOne = "";
          numTwo = "";
@@ -51,9 +65,14 @@ function onClickBtn(event) {
          result.value = "";
       }
       if (action === 'calculate') {
-         result.value += ` = ${calculate(numOne, operators, numTwo)}`;
+         result.value += calculate(numOne, operators, numTwo);
+         console.log(calculate(numOne, operators, numTwo));
+         numOne = "";
+         numTwo = "";
+         operators = "";
       }
    }
 }
+
 
 buttons.addEventListener("click", onClickBtn);
