@@ -16,7 +16,7 @@ function calculate(num1, operator, num2) {
    } else if (operator === '-') {
       result.value = num1 - num2;
    } else if (operator === '*') {
-      result.value = num1 + num2;
+      result.value = num1 * num2;
    } else if (operator === '/') {
       result.value = num1 / num2;
    }
@@ -29,48 +29,45 @@ function onClickBtn(event) {
    const btnContent = target.textContent;
 
    if (target.matches('button')) {
+      ////////////////////////////////////////////////////////////////
       if (action === 'number') {
          if (!operators) {
             numOne += btnContent;
             result.value += btnContent;
-            console.log(`num1 ${numOne}`);
-            console.log(`result1 ${result.value}`);
+            onOperator = false;
+            console.log(`one ${numOne}`);
          } else if (operators) {
             onDecimal = false;
             numTwo += btnContent;
             result.value += btnContent;
-            console.log(`num2 ${numTwo}`);
-            console.log(`result2 ${result.value}`);
+            console.log(`Two ${numTwo}`);
          }
       }
 
       if (action === 'operator' && btnContent === '-') {
-         if(!onOperator){
-            onOperator = true;
-         } else if(onOperator){
-            return;
-         }
          if (!numOne) {
             numOne += btnContent;
             result.value += btnContent;
-            console.log(onDecimal);
          } else if (numOne && !operators) {
+            onOperator = false;
+            onDecimal = false;
             operators += btnContent;
             result.value += btnContent;
-         }
-         if (operators && !numTwo) {
-            onOperator = false;
-            console.log(onDecimal);
+            console.log(`-operators ${operators}`);
+         } else if (operators && !numTwo) {
             numTwo += btnContent;
             result.value += btnContent;
-            console.log(onDecimal);
-         } else if (numTwo && !operators) {
-            operators += btnContent;
-            result.value += btnContent;
+            console.log(`-Two ${numTwo}`);
          }
-      } else if (action === 'operator' && btnContent !== '-') {
+      } else if (action === 'operator') {
+         if (!onOperator) {
+            onOperator = true;
+         } else if (onOperator) {
+            return;
+         }
          operators += btnContent;
          result.value += btnContent;
+         console.log(`operators ${operators}`);
       }
 
       if (action === 'decimal') {
@@ -78,27 +75,30 @@ function onClickBtn(event) {
          // 중복제거
          if (!onDecimal) {
             onDecimal = true;
-         } else if (onDecimal){
+         } else if (onDecimal) {
             return;
          }
          // 입력
          if (!operators) {
+            onOperator = false;
             numOne += btnContent;
             result.value += btnContent;
             console.log(onDecimal);
-         } else if(operators && onDecimal){
+         } else if (operators && onDecimal) {
+            onOperator = true;
             numTwo += btnContent;
             result.value += btnContent;
             console.log(onDecimal);
          }
       }
-
+      ///////////////////////////////////////////////////////////////////////
       if (action === 'clear') {
          numOne = "";
          numTwo = "";
          operators = "";
          result.value = "";
          onDecimal = false;
+         onOperator = false;
       }
       if (action === 'calculate') {
          result.value += calculate(numOne, operators, numTwo);
@@ -106,6 +106,8 @@ function onClickBtn(event) {
          numOne = "";
          numTwo = "";
          operators = "";
+         onDecimal = false;
+         onOperator = false;
       }
    }
 }
